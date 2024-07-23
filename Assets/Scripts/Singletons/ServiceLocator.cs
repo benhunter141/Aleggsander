@@ -6,6 +6,8 @@ public class ServiceLocator : MonoBehaviour
 {
     public static ServiceLocator Instance { get; private set; }
     public ScriptableObjectHolder soHolder;
+    public InputHandler inputHandler;
+    public GizmoHolder gizmos;
 
     private void Awake()
     {

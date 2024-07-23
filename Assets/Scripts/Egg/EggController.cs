@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class EggController : MonoBehaviour
 {
-    public Rigidbody rb;
-    //brain - sets goals like move & look
-    //Locomotion - moves feet and also addforces body upright and fwd
-    //Hands / Weapons - moves hands and weapons
-    //Goals / Thoughts / Brain - Receives orders
+    public BodyParts bodyParts;
     public Brain brain;
     public Locomotion locomotion;
-
+    public Tune tune;
     private void Awake()
     {
         brain = new Brain(this);
         locomotion = new Locomotion(this);
+        tune = new Tune(this);
+    }
+
+    private void Start()
+    {
+        //bodyParts.rightHandCJ.anch
     }
 
     private void FixedUpdate()
     {
         locomotion.Process(brain);
+        tune.Movement();
     }
 }

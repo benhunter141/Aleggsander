@@ -11,20 +11,17 @@ public static class Helpers
     static WaitForSeconds _shortDelay = new WaitForSeconds(0.2f);
     static WaitForSeconds _oneSecond = new WaitForSeconds(1f);
 
+    public static void PrintVector3(Vector3 v3)
+    {
+        Debug.Log($"{v3.x.ToString("F2")}, {v3.y.ToString("F2")}, {v3.z.ToString("F2")}");
+    }
+
     public static bool IsFacing(GameObject _unit, Vector3 position)
     {
         float facingThreshhold = 5; //within 5 degrees returns true
-        //BUG & CHANGE: ALLOW FOR HANDLE TO BE DIFFERENT HEIGHTS:
-        //WILL STILL BEND DOWN... AVOID THIS OR CREATE NEW ABILITY TO PICK UP AT HEIGHT
-        //OR GENERALIZE PICKUP TO ALLOW DIFFERENT HEIGHTS
-        //WEAPON LOCATION DICTATES PRESET HAND POSITION
-        //OR WEAPON LOCATION DICTATES HAND POSITION ON SPHERE AROUND SHOULDER
         if (Mathf.Abs(position.y - _unit.transform.position.y) < 0.5) position.y = _unit.transform.position.y;
         Vector3 displacementToTarget = position - _unit.transform.position;
         float signedAngle = Vector3.SignedAngle(_unit.transform.forward, displacementToTarget, Vector3.up);
-        //Debug.Log("abs signedAngle needs to be under 5. Is: " + signedAngle);
-        //Debug.DrawLine(_unit.transform.position, position, Color.green, 0.2f);
-        //Debug.DrawRay(_unit.transform.position, _unit.transform.forward, Color.red, 0.2f);
         if (Mathf.Abs(signedAngle) < facingThreshhold) return true;
             else return false;
     }
@@ -100,7 +97,32 @@ public static class Helpers
         return xComponent + yComponent;
     }
 
+    //For egg, use positions relative to egg, NOT CENTRE
+    public static Vector3 Arc(Vector3 startPosition,
+        Vector3 endPosition,
+        Vector3 centrePosition,
+        float progress)
+    {
+        Vector3 startingDisplacementFromCentre = startPosition - centrePosition;
+        Vector3 endDisplacementFromCentre = endPosition - centrePosition;
+        Vector3 axis = Vector3.Cross(startingDisplacementFromCentre, endDisplacementFromCentre);
+        axis.Normalize();
+        //to get theta you need total angle & progress
+        float theta = progress * Vector3.SignedAngle(endDisplacementFromCentre, startingDisplacementFromCentre, axis) * Mathf.PI / 180f;
+
+        if (progress == 0)
+        {
+            //Debug.Log("New Arc");
+            //Helpers.PrintVector3(startPosition);
+            //Debug.Log($"signed angle:{theta.ToString("F2")}");
+        }
+            return centrePosition + PositionOnCircle(theta, axis, startingDisplacementFromCentre);
+    }
+
     public static Vector3 FlatForward(Vector3 forward) => new Vector3(forward.x, 0, forward.z);
+
+    public static Vector3 ConvertToV3(Vector2 v2) => new Vector3(v2.x, 0, v2.y);
+    public static Vector2 ConvertToV2(Vector3 v3) => new Vector2(v3.x, v3.z);
     
 
 }
