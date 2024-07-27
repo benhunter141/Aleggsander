@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DoubleLine
   m_EditorClassIdentifier: 
   spacing: 2
-  rows: 2
+  rows: 6

@@ -5,4 +5,5 @@ using UnityEngine;
 public class GizmoHolder : MonoBehaviour
 {
     public List<GameObject> gizmos;
+    public GameObject gizmoPrefab;
 }

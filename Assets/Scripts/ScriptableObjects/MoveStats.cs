@@ -18,6 +18,11 @@ public class MoveStats : ScriptableObject
     public float nudgeForce;
     public int stepDuration;
 
+    //follower stats
+    public float followerMoveMultiplier;
+    public float cumulativeMoveErrorFactor;
+    public float cumulativeMoveErrorDampener;
+
 
     //Most of the above are read from here, but some need to be updated if they are part of a component.
 

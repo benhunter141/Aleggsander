@@ -23,4 +23,10 @@ public class DirectionRing : MonoBehaviour
         position.y = 0f;
         transform.position = position;
     }
+
+    public void ChangeRingColorTo(Material material)
+    {
+        ring.GetComponent<MeshRenderer>().material = material;
+        arrow.GetComponent<MeshRenderer>().material = material;
+    }
 }

@@ -23,7 +23,11 @@ public class Footwork
     {
         egg = _egg;
         bodyParts = egg.bodyParts;
+        if (ServiceLocator.Instance is null) Debug.Log("1", egg.gameObject);
+        if (ServiceLocator.Instance.soHolder is null) Debug.Log("2", egg.gameObject);
+        if (ServiceLocator.Instance.soHolder.standardEggMoveStats is null) Debug.Log("3", egg.gameObject);
         stats = ServiceLocator.Instance.soHolder.standardEggMoveStats;
+        if (stats is null) Debug.Log("stats is null???", egg.gameObject);
     }
     
     public void JointPositionWalkForward(Vector2 move)
@@ -65,6 +69,7 @@ public class Footwork
             //foot moves back, tilted axis so foot gets underneath smoothly
             Vector3 centre = new Vector3(stats.centreBackLateralDistance, stats.centreBackHeight, 0);
             footPosition = Helpers.Arc(RightFootForwardPosition(stepLength, localMove), RightFootBackPosition(stepLength, localMove), centre, 2 * stepProgress - 1f);
+            //nudge right as right foot moves back
             egg.bodyParts.rb.AddForce(egg.transform.right * stats.nudgeForce);
         }
         //Debug.Log($"stepprogress: {stepProgress}. footPosition:{footPosition.x.ToString("F2")},{footPosition.y.ToString("F2")},{footPosition.z.ToString("F2")}");
@@ -77,7 +82,7 @@ public class Footwork
             //Debug.Log("limiting CA, length:" + displacement.magnitude);
         }
         egg.bodyParts.rightFootCJ.connectedAnchor = footPosition;
-        ServiceLocator.Instance.gizmos.gizmos[1].transform.position = egg.transform.TransformPoint(footPosition);
+        //ServiceLocator.Instance.gizmos.gizmos[1].transform.position = egg.transform.TransformPoint(footPosition);
     }
 
     void StepLeft(float stepProgress, Vector2 move)
@@ -125,7 +130,7 @@ public class Footwork
             //Debug.Log("limiting CA, length:" + displacement.magnitude);
         }
         egg.bodyParts.leftFootCJ.connectedAnchor = footPosition;
-        ServiceLocator.Instance.gizmos.gizmos[0].transform.position = egg.transform.TransformPoint(footPosition);
+        //ServiceLocator.Instance.gizmos.gizmos[0].transform.position = egg.transform.TransformPoint(footPosition);
     }
 
     Vector3 RightFootRestPosition() => new Vector3(stats.footLateralDistance, stats.footHeight, 0);

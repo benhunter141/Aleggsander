@@ -26,6 +26,9 @@ MonoBehaviour:
   maxTorqueDeltaTheta: 20
   nudgeForce: 12
   stepDuration: 80
+  followerMoveMultiplier: 4
+  cumulativeMoveErrorFactor: 0.1
+  cumulativeMoveErrorDampener: 0.9
   mass: 10
   drag: 0.5
   angularDrag: 0.5

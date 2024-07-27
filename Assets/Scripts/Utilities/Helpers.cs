@@ -11,6 +11,17 @@ public static class Helpers
     static WaitForSeconds _shortDelay = new WaitForSeconds(0.2f);
     static WaitForSeconds _oneSecond = new WaitForSeconds(1f);
 
+    public static Vector3 AveragePosition(List<EggController> objects) //make this generic
+    {
+        Vector3 position = Vector3.zero;
+        foreach (var item in objects)
+        {
+            //how do you access properties when it is generic and might not have those properties?
+            position += item.transform.position;
+        }
+        position /= objects.Count;
+        return position;
+    }
     public static void PrintVector3(Vector3 v3)
     {
         Debug.Log($"{v3.x.ToString("F2")}, {v3.y.ToString("F2")}, {v3.z.ToString("F2")}");

@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class BodyParts : MonoBehaviour
 {
+    //GOs
     public GameObject body, leftFoot, rightFoot, leftHand, rightHand;
+
+    //Custom Components
+    public DirectionRing directionRing;
+    public RecruitSphere recruitSphere;
+
+    //Gotten Components
     [HideInInspector]
     public ConfigurableJoint leftFootCJ, rightFootCJ, leftHandCJ, rightHandCJ;
     [HideInInspector]

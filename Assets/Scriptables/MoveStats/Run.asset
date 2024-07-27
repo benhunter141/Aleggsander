@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b564a13dfa709e245aa51d5fb12c480e, type: 3}
   m_Name: Run
   m_EditorClassIdentifier: 
-  moveForce: 20
+  moveForce: 5
   turnP: 5
   turnD: 1
   uprightStrength: 555
@@ -26,6 +26,9 @@ MonoBehaviour:
   maxTorqueDeltaTheta: 20
   nudgeForce: 12
   stepDuration: 80
+  followerMoveMultiplier: 4
+  cumulativeMoveErrorFactor: 0.1
+  cumulativeMoveErrorDampener: 0.9
   mass: 10
   drag: 0.5
   angularDrag: 0.5

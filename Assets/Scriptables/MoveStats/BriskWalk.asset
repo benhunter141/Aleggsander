@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b564a13dfa709e245aa51d5fb12c480e, type: 3}
   m_Name: BriskWalk
   m_EditorClassIdentifier: 
-  moveForce: 20
+  moveForce: 5
   turnP: 5
   turnD: 1
   uprightStrength: 555
@@ -23,17 +23,20 @@ MonoBehaviour:
   centreBackHeight: 0
   centreBackLateralDistance: 1
   maxConnectedAnchorDistance: 1
-  maxTorqueDeltaTheta: 20
-  nudgeForce: 12
+  maxTorqueDeltaTheta: 15
+  nudgeForce: 14.7
   stepDuration: 60
+  followerMoveMultiplier: 4
+  cumulativeMoveErrorFactor: 0.1
+  cumulativeMoveErrorDampener: 0.9
   mass: 10
   drag: 0.5
   angularDrag: 0.5
   footMass: 2
   footDrag: 3
   footAngularDrag: 1
-  spring: 300
-  damper: 15
+  spring: 500
+  damper: 35
   bodyDynamicFriction: 0
   bodyStaticFriction: 0
   footDynamicFriction: 0.3

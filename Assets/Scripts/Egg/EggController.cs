@@ -5,24 +5,32 @@ using UnityEngine;
 public class EggController : MonoBehaviour
 {
     public BodyParts bodyParts;
+    public Formation formation;
+
     public Brain brain;
-    public Locomotion locomotion;
+    public Movement locomotion;
     public Tune tune;
+    //public Recruit recruit;
+    public Leadership leadership;
+    //public Follow follow;
+
+   
     private void Awake()
     {
         brain = new Brain(this);
-        locomotion = new Locomotion(this);
+        locomotion = new Movement(this);
         tune = new Tune(this);
+        leadership = new Leadership(this, formation);
     }
 
-    private void Start()
+    private void Update()
     {
-        //bodyParts.rightHandCJ.anch
+        if (leadership.followers.Count > 0) leadership.SendOutOrders();
+        tune.Movement();
     }
 
     private void FixedUpdate()
     {
         locomotion.Process(brain);
-        tune.Movement();
     }
 }
