@@ -11,7 +11,7 @@ public static class Helpers
     static WaitForSeconds _shortDelay = new WaitForSeconds(0.2f);
     static WaitForSeconds _oneSecond = new WaitForSeconds(1f);
 
-    public static Vector3 AveragePosition(List<EggController> objects) //make this generic
+    public static Vector3 AveragePosition(List<Unit> objects) //make this generic
     {
         Vector3 position = Vector3.zero;
         foreach (var item in objects)
@@ -27,15 +27,16 @@ public static class Helpers
         Debug.Log($"{v3.x.ToString("F2")}, {v3.y.ToString("F2")}, {v3.z.ToString("F2")}");
     }
 
-    public static bool IsFacing(GameObject _unit, Vector3 position)
+    public static bool IsFacing(GameObject _unit, Vector3 _position, float deltaTheta)
     {
-        float facingThreshhold = 5; //within 5 degrees returns true
-        if (Mathf.Abs(position.y - _unit.transform.position.y) < 0.5) position.y = _unit.transform.position.y;
-        Vector3 displacementToTarget = position - _unit.transform.position;
-        float signedAngle = Vector3.SignedAngle(_unit.transform.forward, displacementToTarget, Vector3.up);
-        if (Mathf.Abs(signedAngle) < facingThreshhold) return true;
-            else return false;
+        Vector3 displacement = _position - _unit.transform.position;
+        Vector3 forward = _unit.transform.forward;
+        float delta = Vector3.Angle(displacement, forward);
+        
+        if (delta > deltaTheta) return false;
+        else return true;
     }
+
     public static WaitForSeconds OneSecond
     {
         get { return _oneSecond; }
@@ -108,7 +109,7 @@ public static class Helpers
         return xComponent + yComponent;
     }
 
-    //For egg, use positions relative to egg, NOT CENTRE
+    //For egg, use positions relative to egg
     public static Vector3 Arc(Vector3 startPosition,
         Vector3 endPosition,
         Vector3 centrePosition,
@@ -129,6 +130,8 @@ public static class Helpers
         }
             return centrePosition + PositionOnCircle(theta, axis, startingDisplacementFromCentre);
     }
+
+   
 
     public static Vector3 FlatForward(Vector3 forward) => new Vector3(forward.x, 0, forward.z);
 

@@ -8,6 +8,10 @@ public class ServiceLocator : MonoBehaviour
     public ScriptableObjectHolder soHolder;
     public InputHandler inputHandler;
     public GizmoHolder gizmos;
+    public Stats stats;
+    public Animations animations;
+    public UnitManager unitManager;
+    public LayerManager layerManager;
 
     private void Awake()
     {

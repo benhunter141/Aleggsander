@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04ee6ccf559ffe4780fd7ec5887aae7, type: 3}
+  m_Name: SlimeStats
+  m_EditorClassIdentifier: 
+  impulsePerDamage: 10
+  moveForce: 250
+  mass: 30
+  drag: 1
+  dynamicFriction: 0.15
+  staticFriction: 0.2
+  retargetFrequency: 5
+  move: {fileID: 11400000, guid: 639ef18eefa5d1249b90f3462d3d5376, type: 2}
+  turn: {fileID: 11400000, guid: bb800cb8ad6b9c44f9a2329694f5f34f, type: 2}
+  atk: {fileID: 11400000, guid: 59ab26e175f6f44489e6932d053321a9, type: 2}

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    public EggController selectedEgg;
+    public Unit selectedEgg;
     public PlayerInput input;
     public InputAction move, look;
 

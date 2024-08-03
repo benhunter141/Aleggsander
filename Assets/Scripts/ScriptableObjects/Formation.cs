@@ -5,15 +5,15 @@ using UnityEngine;
 public abstract class Formation : ScriptableObject
 {
     
-    public abstract List<Vector3> Positions(int count, EggController leader); //count is followers. Does not include leader.
+    public abstract List<Vector3> Positions(int count, Unit leader); //count is followers. Does not include leader.
     public abstract List<Vector3> Directions(int count);
-    public Vector3 CentreOfFormation(EggController leader) => leader.transform.position;
-    public void OrderList(EggController leader, ref List<EggController> followers)
+    public Vector3 CentreOfFormation(Unit leader) => leader.transform.position;
+    public void OrderList(Unit leader, ref List<Unit> followers)
     {
         //reorder followers so they are in order of positions they ought to receive
         var localPositions = Positions(followers.Count, leader);
         var centre = CentreOfFormation(leader);
-        var orderedArray = new EggController[followers.Count];
+        var orderedArray = new Unit[followers.Count];
 
         //pop followers off list, populate new one
 
@@ -28,7 +28,7 @@ public abstract class Formation : ScriptableObject
             followers.Remove(furthestFollower);
         }
 
-        followers = new List<EggController>(orderedArray);
+        followers = new List<Unit>(orderedArray);
 
         int PositionIndex(Vector3 eggPosition)
         {
@@ -54,7 +54,7 @@ public abstract class Formation : ScriptableObject
             throw new System.Exception("asdfasdfasdf");
         }
 
-        EggController FurthestFollowerFrom(List<EggController> _followers, Vector3 centreWorldPos)
+        Unit FurthestFollowerFrom(List<Unit> _followers, Vector3 centreWorldPos)
         {
             var furthest = _followers[0];
             for(int i = 1; i < _followers.Count; i++)
@@ -65,7 +65,7 @@ public abstract class Formation : ScriptableObject
             return furthest;
         }
     }
-    protected void UpdateGizmo(List<GameObject> gizmos, List<Vector3> localPositions, EggController leader)
+    protected void UpdateGizmo(List<GameObject> gizmos, List<Vector3> localPositions, Unit leader)
     {
         //Debug.Log($"updating phalanx gizmo. gizmos count:{gizmos.Count}, pos count:{localPositions.Count}");
         while(gizmos.Count < localPositions.Count)

@@ -8,7 +8,7 @@ public class BattleLine : Formation
     public float spacing;
     public int rows;
 
-    public override List<Vector3> Positions(int count, EggController leader)
+    public override List<Vector3> Positions(int count, Unit leader)
     {
         //Debug.Log("battle line positions called");
         var positions = new List<Vector3>();

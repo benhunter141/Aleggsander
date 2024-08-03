@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc36a1e4a2d70844bb49b3c8a22c369a, type: 3}
+  m_Name: Chop
+  m_EditorClassIdentifier: 
+  totalFrames: 120
+  raiseFrames: 50
+  chopFrames: 20
+  restFrames: 20
+  rightHandRest: {x: 1, y: 1, z: 0}
+  rightHandHigh: {x: 1, y: 2, z: 0}
+  rightHandForward: {x: 1, y: 0.5, z: 1}
