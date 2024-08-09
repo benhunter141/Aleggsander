@@ -27,11 +27,11 @@ public class Movement //limited to forces. Locomotion is a physanimation
     public void Process(Brain brain)
     {
         //Forces, Torques
-        MoveForce(brain.move, ServiceLocator.Instance.soHolder.standardEggMoveStats.moveForce);
-        TurnTorque(brain.look, 
-            ServiceLocator.Instance.soHolder.standardEggMoveStats.turnP, 
-            ServiceLocator.Instance.soHolder.standardEggMoveStats.turnD,
-            ServiceLocator.Instance.soHolder.standardEggMoveStats.maxTorqueDeltaTheta);
+        //MoveForce(brain.move, ServiceLocator.Instance.soHolder.standardEggMoveStats.moveForce);
+        //TurnTorque(brain.look, 
+            //ServiceLocator.Instance.soHolder.standardEggMoveStats.turnP, 
+            //ServiceLocator.Instance.soHolder.standardEggMoveStats.turnD,
+            //ServiceLocator.Instance.soHolder.standardEggMoveStats.maxTorqueDeltaTheta);
         UprightForce(ServiceLocator.Instance.soHolder.standardEggMoveStats.uprightStrength);
 
         //Walk with feet (this contains nudgeForce...)

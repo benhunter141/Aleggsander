@@ -18,7 +18,9 @@ MonoBehaviour:
   drag: 1
   dynamicFriction: 0.15
   staticFriction: 0.2
+  originalScale: 5
   retargetFrequency: 5
+  totalHealth: 50
   move: {fileID: 11400000, guid: 639ef18eefa5d1249b90f3462d3d5376, type: 2}
   turn: {fileID: 11400000, guid: bb800cb8ad6b9c44f9a2329694f5f34f, type: 2}
   atk: {fileID: 11400000, guid: 59ab26e175f6f44489e6932d053321a9, type: 2}

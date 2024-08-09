@@ -5,7 +5,7 @@ using System;
 
 public class Slime : Unit
 {
-    State aggro, inMotion, sleep;
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,28 +16,7 @@ public class Slime : Unit
         int roundedDamage = (int)(magnitude / stats.impulsePerDamage);
         hit.health.GetHitFor(roundedDamage);
     }
-private void Start()
-    {
-        aggro = new Aggro(this);
-        inMotion = new AttackState(this);
-        sleep = new Sleep(this);
-        
-        //transitions
-        
-        aggro.transitions.Add(new Transition(this, aggro, inMotion, stats.atk.CanHit));
-        inMotion.transitions.Add(new Transition(this, inMotion, aggro, physAnimator.IsIdling));
-        aggro.transitions.Add(new Transition(this, aggro, sleep, targeting.SelfTargeting));
-        //to do:
-        //death + transitions to death
-        //stun + transitions in and out of stun
 
-        currentState = aggro;
-    }
 
-    private void FixedUpdate()
-    {
-        stats.Tune(this);
-        currentState.Tick(); //state machine
-        physAnimator.Process(); //actions (called by state machine)
-    }
+
 }

@@ -10,16 +10,17 @@ public class SlimeAttack : PhysAction
     public float canHitRange, canHitRadius, canHitDeltaTheta;
     public override bool CanHit(Unit unit)
     {
+        if (unit is null) throw new System.Exception();
         LayerMask mask = ServiceLocator.Instance.layerManager.layerMask;
         RaycastHit[] hits =
         Physics.SphereCastAll(unit.transform.position, canHitRadius, unit.transform.forward, canHitRange, mask);
         foreach(var hit in hits)
         {
-            //Debug.Log("spherecast for slime attack canhit is hitting...");
+            //Debug.Log("spherecast for slime attack canhit is hitting...", hit.collider.gameObject);
             Unit _target = hit.collider.GetComponent<Unit>();
             if (_target.allegiance == unit.allegiance) continue; //if allied, continue;
             if (!Helpers.IsFacing(unit.gameObject, _target.transform.position, canHitDeltaTheta)) continue;
-            Debug.Log("can hit true");
+            //Debug.Log("can hit true");
             return true;
         }
         
@@ -32,14 +33,14 @@ public class SlimeAttack : PhysAction
         //phase 3: recover, scale back to 1 1 1
         //if (currentFrame == 0) Debug.Log($"Starting slime attack");
         //Debug.Log("doing slime attack any frame");
+        float x, y, z;
         if (currentFrame < prepFrames)
         {
             //phase 1: no forces, grow tall & skinny, turn to face target as best as possible
             var progress = (float)currentFrame / prepFrames;
-            float y = 1 + (tallFactor - 1) * progress;
-            float x = 1 / y;
-            float z = 1 / y;
-            SetScale(x, y, z);
+            y = 1 + (tallFactor - 1) * progress;
+            x = 1 / y;
+            z = 1 / y;
         }
         else if (currentFrame < lungeFrames + prepFrames)
         {
@@ -54,25 +55,24 @@ public class SlimeAttack : PhysAction
             float xEnd = 1 / yEnd;
             float zStart = 1 / yStart;
             float zEnd = longFactor * xEnd;
-            float y = yStart + (yEnd - yStart) * progress;
-            float x = xStart + (xEnd - xStart) * progress;
-            float z = zStart + (zEnd - zStart) * progress;
-            SetScale(x, y, z);
+            y = yStart + (yEnd - yStart) * progress;
+            x = xStart + (xEnd - xStart) * progress;
+            z = zStart + (zEnd - zStart) * progress;
         }
-        else if (currentFrame < totalFrames)
+        else
         {
             //phase 3: recover, scale back to 1 1 1 from short & long
             var progress = (float)(currentFrame - prepFrames - lungeFrames) / (totalFrames - prepFrames - lungeFrames);
             float yStart = shortFactor;
             float zStart = longFactor / yStart;
 
-            float y = yStart + (1 - yStart) * progress;
-            float x = 1 / y;
-            float z = zStart + (1 - zStart) * progress;
-            SetScale(x, y, z);
+            y = yStart + (1 - yStart) * progress;
+            x = 1 / y;
+            z = zStart + (1 - zStart) * progress;
         }
-
-        if (currentFrame == totalFrames - 1) SetScale(1, 1, 1);
+        float OGScale = unit.stats.originalScale;
+        SetScale(OGScale * x, OGScale * y, OGScale * z);
+        if (currentFrame == totalFrames - 1) SetScale(OGScale, OGScale, OGScale);
 
         void SetScale(float x, float y, float z)
         {

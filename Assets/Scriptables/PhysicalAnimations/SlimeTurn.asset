@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalFrames: 1
   maxTorqueDeltaTheta: 15
-  turnP: 18
+  turnP: 40
   turnD: 30

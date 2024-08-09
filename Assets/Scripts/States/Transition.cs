@@ -5,12 +5,12 @@ using System;
 
 public class Transition
 {
-    Unit unit;
+    StateMachine sm;
     Func<Unit, bool> condition;
     State from, to;
-    public Transition(Unit _unit, State _from, State _to, Func<Unit, bool> _condition)
+    public Transition(StateMachine _sm, State _from, State _to, Func<Unit, bool> _condition)
     {
-        unit = _unit;
+        sm = _sm;
         condition = _condition;
         from = _from;
         to = _to;
@@ -18,9 +18,9 @@ public class Transition
 
     public bool Process()
     {
-        if (!condition(unit)) return false;
+        if (!condition(sm.unit)) return false;
         //Debug.Log($"transitioning");
-        from.TransitionTo(unit, to);
+        from.TransitionTo(sm, to);
         return true;
     }
 }

@@ -6,6 +6,25 @@ public class Chop : PhysAction
 {
     public int raiseFrames, chopFrames, restFrames;
     public Vector3 rightHandRest, rightHandHigh, rightHandForward;
+    public float range;
+
+    public override bool CanHit(Unit unit)
+    {
+            //raycast from hand forward
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(unit.bodyParts.rightHand.transform.position,
+                unit.bodyParts.rightHand.transform.forward,
+                out hit,
+                range))
+            {
+                if (!hit.collider.gameObject.TryGetComponent<Unit>(out Unit targetEgg)) return false;
+                if (targetEgg == unit) return false;
+                //Debug.Log("target right in front, attacking", targetEgg.gameObject);
+                return true;
+            }
+            return false;
+    }
     public override void Do(Unit egg, int currentFrame)
     {
         //right hand at rest, up high, forward

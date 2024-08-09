@@ -20,20 +20,20 @@ public abstract class Weapon : MonoBehaviour
         if (!collision.gameObject.TryGetComponent<Unit>(out Unit egg)) return;
         if (egg == weilder) return;
 
-        Debug.Log($"v3 impulse: {collision.impulse.magnitude.ToString("F2")}");
+        //Debug.Log($"v3 impulse: {collision.impulse.magnitude.ToString("F2")}");
         //Debug.Log($"Is weilder null?: {weilder is null}");
         //Debug.Log($"Is joint null?: {joint is null}");
 
         if (collision.impulse.magnitude < minimumImpulseToDamage) return;
 
         egg.health.GetHitFor((int)(collision.impulse.magnitude / minimumImpulseToDamage));
-
+        //Debug.Log($"hit for dmg{(int)(collision.impulse.magnitude / minimumImpulseToDamage)}");
         KnockBack(egg, -collision.impulse);
     }
 
-    void KnockBack(Unit egg, Vector3 vector)
+    void KnockBack(Unit _unit, Vector3 vector)
     {
-        egg.bodyParts.rb.AddForce(vector * knockBack, ForceMode.Impulse);
+        _unit.bodyParts.rb.AddForce(vector * knockBack, ForceMode.Impulse);
     }
     public void GetPickedUpBy(Unit egg) //snaps hand to weapon position & rotation, collider off, connects
     {

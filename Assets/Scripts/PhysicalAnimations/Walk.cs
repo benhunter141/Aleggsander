@@ -5,16 +5,31 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptables/PhysAnimations/Walk")]
 public class Walk : PhysAction
 {
+    public float peakFootXRot;
     public override void Do(Unit egg, int currentFrame)
     {
         var stats = ServiceLocator.Instance.soHolder.standardEggMoveStats;
         PlaceFeet(egg.brain.move);
-
+        RotateFeet();
         //goal is to set cj.ca.positions and cj.targetrotations for feet
         //maybe a little nudge force here or there
         //frame is incremented elsewhere, we just do one frame
 
+        void RotateFeet()
+        {
+            float progress = (float)currentFrame / totalFrames;
+            float rotateAmountLeft = -peakFootXRot * Mathf.Cos(2 * Mathf.PI * progress);
+            float rotateAmountRight = -rotateAmountLeft;
 
+            ConfigurableJoint leftCJ = egg.bodyParts.leftFootCJ;
+            ConfigurableJoint rightCJ = egg.bodyParts.rightFootCJ;
+
+            Quaternion leftQuat = Quaternion.Euler(new Vector3(rotateAmountLeft, 0, 0));
+            Quaternion rightQuat = Quaternion.Euler(new Vector3(rotateAmountRight, 0, 0));
+
+            ConfigurableJointExtensions.SetTargetRotationLocal(leftCJ, leftQuat, Quaternion.identity);
+            ConfigurableJointExtensions.SetTargetRotationLocal(rightCJ, rightQuat, Quaternion.identity);
+        }
 
         void PlaceFeet(Vector2 move)
         {
@@ -26,6 +41,7 @@ public class Walk : PhysAction
 
         void PlaceRightFoot(float stepProgress, Vector2 move)
         {
+            //STARTS BACK, GOES FWD, THEN BACK
             Vector3 footPosition;
             Vector3 moveV3 = new Vector3(move.x, 0, move.y);
             float dot = Vector3.Dot(moveV3, egg.transform.forward);
@@ -71,6 +87,7 @@ public class Walk : PhysAction
 
         void PlaceLeftFoot(float stepProgress, Vector2 move)
         {
+            //STARTS FWD, BACK, THEN FWD
             //reversed: back then fwd
             Vector3 footPosition;
             Vector3 moveV3 = new Vector3(move.x, 0, move.y);

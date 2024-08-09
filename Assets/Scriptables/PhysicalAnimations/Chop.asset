@@ -19,3 +19,4 @@ MonoBehaviour:
   rightHandRest: {x: 1, y: 1, z: 0}
   rightHandHigh: {x: 1, y: 2, z: 0}
   rightHandForward: {x: 1, y: 0.5, z: 1}
+  range: 2

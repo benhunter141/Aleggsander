@@ -31,6 +31,7 @@ public class Targeting
         foreach(var u in allUnits)
         {
             if (u == unit) continue;
+            if (u.allegiance == unit.allegiance) continue;
             float newDist = Vector3.Distance(u.transform.position, unit.transform.position);
             if (newDist >= distance) continue;
             distance = newDist;
@@ -38,25 +39,9 @@ public class Targeting
         }
         if (target == unit)
         {
-            Debug.Log("targeting self, turn unit off or idle");
+            //Debug.Log("targeting self, turn unit off or idle");
         }
         return target;
     }
-    public bool EnemyInRange() //DEPRECATED, range check should be specific to the attack (this is for chop) and stored in the PA object
-    {
-        //raycast from hand forward
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(unit.bodyParts.rightHand.transform.position, 
-            unit.bodyParts.rightHand.transform.forward, 
-            out hit, 
-            ServiceLocator.Instance.stats.combat.chopTargetingRange))
-        {
-            if (!hit.collider.gameObject.TryGetComponent<Unit>(out Unit targetEgg)) return false;
-            if (targetEgg == unit) return false;
-            Debug.Log("target right in front, attacking", targetEgg.gameObject);
-            return true;
-        }
-        return false;
-    }
+
 }

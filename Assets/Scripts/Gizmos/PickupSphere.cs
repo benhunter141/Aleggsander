@@ -9,7 +9,7 @@ public class PickupSphere : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<Egg>(out Egg egg)) return;
-        Debug.Log("picked up");
+        //Debug.Log("picked up");
         weapon.GetPickedUpBy(egg);
 
         gameObject.SetActive(false);

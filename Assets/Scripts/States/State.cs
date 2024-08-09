@@ -19,11 +19,11 @@ public abstract class State
             }
         }
     }
-    public void TransitionTo(Unit unit, State state)
+    public void TransitionTo(StateMachine sm, State state)
     {
         //Debug.Log("2 setting current state");
-        unit.currentState = state;
+        sm.currentState = state;
         //Debug.Log($"3 current state is now: {unit.currentState}");
-        unit.currentState.OnEnter();
+        sm.currentState.OnEnter();
     }
 }

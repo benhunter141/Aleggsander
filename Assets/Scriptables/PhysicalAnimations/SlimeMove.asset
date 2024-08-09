@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SlimeMove
   m_EditorClassIdentifier: 
   totalFrames: 1
+  facingPenalty: 0.3

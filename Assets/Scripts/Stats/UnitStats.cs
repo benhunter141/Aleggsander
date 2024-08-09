@@ -9,7 +9,9 @@ public class UnitStats : ScriptableObject
     public float impulsePerDamage;
     public float moveForce, mass, drag;
     public float dynamicFriction, staticFriction;
+    public float originalScale;
     public int retargetFrequency;
+    public int totalHealth;
 
     public PhysAction move, turn, atk;
     public State sleep;

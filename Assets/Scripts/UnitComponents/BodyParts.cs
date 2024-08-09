@@ -5,13 +5,15 @@ using UnityEngine;
 public class BodyParts : MonoBehaviour
 {
     //GOs
-    public GameObject body, leftFoot, rightFoot, leftHand, rightHand;
+    public GameObject body, leftFoot, rightFoot, leftHand, rightHand, leftEye, rightEye;
 
     //Custom Components
     public DirectionRing directionRing;
     public RecruitSphere recruitSphere;
 
-    //Gotten Components
+    //Gotten Components got by unit stats?
+    [HideInInspector]
+    public Renderer leftEyeRenderer, rightEyeRenderer;
     [HideInInspector]
     public ConfigurableJoint leftFootCJ, rightFootCJ, leftHandCJ, rightHandCJ;
     [HideInInspector]
@@ -25,5 +27,7 @@ public class BodyParts : MonoBehaviour
     {
         rb = body.GetComponent<Rigidbody>();
         bodyCollider = GetComponent<Collider>();
+        leftEyeRenderer = leftEye.GetComponent<Renderer>();
+        rightEyeRenderer = rightEye.GetComponent<Renderer>();
     }
 }

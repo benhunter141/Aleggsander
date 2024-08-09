@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c98efed40613f46b7204bbd38471cc, type: 3}
   m_Name: SlimeAttack
   m_EditorClassIdentifier: 
-  totalFrames: 80
-  prepFrames: 20
+  totalFrames: 300
+  prepFrames: 80
   lungeFrames: 30
-  tallFactor: 2
+  tallFactor: 1.2
   shortFactor: 0.9
-  longFactor: 2
-  impulseMagnitude: 800
-  canHitRange: 4
-  canHitRadius: 1
+  longFactor: 1.2
+  impulseMagnitude: 700
+  canHitRange: 10
+  canHitRadius: 8
   canHitDeltaTheta: 33
