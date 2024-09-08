@@ -23,6 +23,6 @@ public class Follow : State
         //Debug.Log($"follow tick", egg.gameObject);
         if (!unit.physAnimator.IsWalking()) unit.physAnimator.StartAnimation(walk);
         if (!unit.physAnimator.IsChopping() && chop.CanHit(unit)) unit.physAnimator.StartAnimation(chop);
-        Transition();
+        CheckForTransitions(unit.sm);
     }
 }

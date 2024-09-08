@@ -16,7 +16,7 @@ public class Aggro : State
 
     public override void OnEnter()
     {
-        Transition();
+        CheckForTransitions(unit.sm);
         //show angry emoticon
     }
 
@@ -26,7 +26,7 @@ public class Aggro : State
         unit.targeting.RetargetTick();
         if (!Moving()) Move();
         if (!Turning()) Turn();
-        Transition();
+        CheckForTransitions(unit.sm);
     }
 
     bool Moving() => unit.physAnimator.IsAnimating(unit.stats.move);

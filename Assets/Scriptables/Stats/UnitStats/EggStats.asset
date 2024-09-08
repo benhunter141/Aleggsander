@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impulsePerDamage: 10
   moveForce: 15
-  mass: 10
+  mass: 12
   drag: 1
   dynamicFriction: 0.15
   staticFriction: 2
@@ -24,3 +24,12 @@ MonoBehaviour:
   move: {fileID: 11400000, guid: f7cb132f8a7df4c46893f794b8421632, type: 2}
   turn: {fileID: 11400000, guid: 247d05fe4b0214f419f9e93d6255e53c, type: 2}
   atk: {fileID: 11400000, guid: 6fc113ff9a3449c4fb16823ac9ae3064, type: 2}
+  getup: {fileID: 11400000, guid: 34dbb11c615b4f348861512dad8b8108, type: 2}
+  stabilityTime: 10
+  posTolerance: 0.1
+  rotTolerance: 0.15
+  uprightTolerance: 60
+  pCoeff: 0.9
+  iCoeff: 1.38
+  dCoeff: 0.05
+  memoryFrames: 100

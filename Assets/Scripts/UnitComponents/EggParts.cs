@@ -28,5 +28,9 @@ public class EggParts : BodyParts
         rightFootRot = rightFoot.transform.localRotation;
         leftHandRot = leftHand.transform.localRotation;
         rightHandRot = rightHand.transform.localRotation;
+
+        //Detach Hands and Feet
+        //rightHand.transform.parent.parent = null;
+        //rightFoot.transform.parent.parent = null;
     }
 }

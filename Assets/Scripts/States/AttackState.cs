@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : State //this state basically does nothing, waits until animation finishes then transitions usually, defined in Slime.cs
+public class AttackState : State //this state clears PA and starts attack, transitions when ... (?) atk PA ends? see behaviour tree
 {
     Unit unit;
 
@@ -13,12 +13,14 @@ public class AttackState : State //this state basically does nothing, waits unti
     }
     public override void OnEnter()
     {
-        unit.physAnimator.StartAnimation(unit.stats.atk);
+        unit.physAnimator.ClearAllAnimations();
+        PhysAction bestAttack = unit.BestAttack();
+        unit.physAnimator.StartAnimation(bestAttack);
     }
 
     public override void Tick()
     {
-        Transition();
+        CheckForTransitions(unit.sm);
     }
 
     //bool Attacking() => unit.physAnimator.IsAnimating(unit.stats.atk);

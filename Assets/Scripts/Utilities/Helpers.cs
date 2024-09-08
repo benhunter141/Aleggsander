@@ -11,6 +11,16 @@ public static class Helpers
     static WaitForSeconds _shortDelay = new WaitForSeconds(0.2f);
     static WaitForSeconds _oneSecond = new WaitForSeconds(1f);
 
+    public static Vector2 AverageVector(List<Vector2> list)
+    {
+        Vector2 sum = Vector2.zero;
+        foreach(var l in list)
+        {
+            sum += l;
+        }
+        sum /= list.Count;
+        return sum;
+    }
     public static Vector3 AveragePosition(List<Unit> objects) //make this generic
     {
         Vector3 position = Vector3.zero;

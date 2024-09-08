@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43954fdc8a44a7e4db94f431bdbfbb31, type: 3}
+  m_Name: Pushup
+  m_EditorClassIdentifier: 
+  totalFrames: 1
+  rightHandLoadPosition: {x: 0.5, y: 1.5, z: 1}
+  leftHandLoadPosition: {x: -0.5, y: 1.5, z: 1}
+  rightHandPushPosition: {x: 0.5, y: 1, z: 2}
+  leftHandPushPosition: {x: -0.5, y: 1, z: 2}
+  rightFootPosition: {x: 0.6, y: 0.4, z: 0.4}
+  leftFootPosition: {x: -0.6, y: 0.4, z: 0.4}
+  toeAngle: 15

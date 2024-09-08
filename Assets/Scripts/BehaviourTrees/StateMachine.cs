@@ -6,6 +6,7 @@ public class StateMachine
 {
     public Unit unit;
     public State currentState;
+    public int framesInState;
 
     public StateMachine(Unit _unit)
     {

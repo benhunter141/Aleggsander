@@ -7,8 +7,9 @@ public abstract class State
     public List<Transition> transitions = new List<Transition>();
     public abstract void Tick();
     public abstract void OnEnter();
-    public void Transition()
+    public void CheckForTransitions(StateMachine sm)
     {
+        sm.framesInState++;
         //Debug.Log("1 checking transitions...");
         foreach (var t in transitions)
         {
@@ -25,5 +26,6 @@ public abstract class State
         sm.currentState = state;
         //Debug.Log($"3 current state is now: {unit.currentState}");
         sm.currentState.OnEnter();
+        sm.framesInState = 0;
     }
 }

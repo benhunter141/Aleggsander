@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990e9f5faed83e646a70f7fa0fcb7514, type: 3}
+  m_Name: GetupCollection
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 356af657c7dbe9c4c8bea9e000aa05dc, type: 2}
+  - {fileID: 11400000, guid: fea2a9bd9f049b046b44728f78124bb6, type: 2}
+  - {fileID: 11400000, guid: cf9d63e18c53fe64184c17f5ea106c83, type: 2}

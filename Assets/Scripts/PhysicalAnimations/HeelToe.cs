@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptables/HeelToe")]
+[CreateAssetMenu(menuName = "Scriptables/PhysActions/HeelToe")]
 public class HeelToe : PhysAction //over 100 frames, rotates toes down and back up to flat
 {
     public float startRot, endRot;

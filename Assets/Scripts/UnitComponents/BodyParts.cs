@@ -6,6 +6,7 @@ public class BodyParts : MonoBehaviour
 {
     //GOs
     public GameObject body, leftFoot, rightFoot, leftHand, rightHand, leftEye, rightEye;
+    public GameObject centreOfBalanceGizmo, balanceBaseGizmo, balanceBaseChild;
 
     //Custom Components
     public DirectionRing directionRing;
@@ -23,10 +24,12 @@ public class BodyParts : MonoBehaviour
     [HideInInspector]
     public Quaternion leftFootRot, rightFootRot, leftHandRot, rightHandRot;
 
+    
+
     protected virtual void Awake()
     {
-        rb = body.GetComponent<Rigidbody>();
-        bodyCollider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+        bodyCollider = body.GetComponent<Collider>();
         leftEyeRenderer = leftEye.GetComponent<Renderer>();
         rightEyeRenderer = rightEye.GetComponent<Renderer>();
     }

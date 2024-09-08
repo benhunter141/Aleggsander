@@ -11,7 +11,9 @@ public class Sleep : State
     }
     public override void OnEnter()
     {
-        //Debug.Log("sleep", unit.gameObject);
+        Debug.Log("sleep", unit.gameObject);
+        unit.physAnimator.ClearAllAnimations();
+        unit.physAnimator.StartAnimation(unit.restPose);
         //do nothing
     }
 

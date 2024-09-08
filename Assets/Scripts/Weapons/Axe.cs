@@ -4,9 +4,5 @@ using UnityEngine;
 
 public class Axe : Weapon
 {
-    public void Chop()
-    {
-        //hand position and rotation at frames
-        //physanimator
-    }
+
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1bd07b72b9d864288c728bb6b293b1, type: 3}
+  m_Name: StandUpFallDown
+  m_EditorClassIdentifier: 
+  canRoll: {fileID: 11400000, guid: 42264827e4c689040aa8553e34f9be53, type: 2}
+  placeHands: {fileID: 11400000, guid: 584abacb1bc3eff43bc8f960e509de7e, type: 2}
+  downwardDog: {fileID: 11400000, guid: defc874f49bb57b4ead15d2b24d20617, type: 2}
+  pushup: {fileID: 11400000, guid: 2a57e18107726994785d7d9d3155bdc4, type: 2}
+  stand: {fileID: 11400000, guid: 3d8dd88060eb4a148ba1cf1656ff9f0e, type: 2}
+  tPose: {fileID: 0}
+  partlyOnBellyTolerance: 60
+  fullyOnBellyTolerance: 20
+  posturedUpTolerance: 71.9
+  balancedTolerance: 0.1
