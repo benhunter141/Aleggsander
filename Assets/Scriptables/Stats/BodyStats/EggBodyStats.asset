@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EggBodyStats
   m_EditorClassIdentifier: 
   handRestHeight: 1
-  footRestHeight: -0.4
+  footRestHeight: -0.1
   handLateralDistance: 1.2
   footLateralDistance: 0.5
   armLength: 1.7

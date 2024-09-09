@@ -6,6 +6,8 @@ public class Stand : PhysAction //stand and balance
 {
     public float currentCAFactor, restCAFactor, leanCAFactor;
     public float lateralStabilityFactor; //make x value less significant. (0,1)
+    public float handReachMultiplier, footReachMultiplier;
+    public float toePointFactor;
     //public float reachMax;
     public override void Do(Unit unit, int currentFrame)
     {
@@ -28,23 +30,43 @@ public class Stand : PhysAction //stand and balance
         Vector3 lfCurrent = unit.bodyParts.leftFootCJ.connectedAnchor;
 
         //feet go in direction of lean
-        Vector3 rfLean = rfRest + leanDirection;
-        Vector3 lfLean = lfRest + leanDirection;
+        Vector3 rfLean = rfRest + leanDirection * footReachMultiplier;
+        Vector3 lfLean = lfRest + leanDirection * footReachMultiplier;
 
         Vector3 smoothedRF = currentCAFactor * rfCurrent +
                             restCAFactor * rfRest +
                             leanCAFactor * rfLean;
-        smoothedRF /= currentCAFactor + restCAFactor + leanCAFactor;
+        smoothedRF /= (currentCAFactor + restCAFactor + leanCAFactor);
         Vector3 smoothedLF = currentCAFactor * lfCurrent +
                             restCAFactor * lfRest +
                             leanCAFactor * lfLean;
-        smoothedLF /= currentCAFactor + restCAFactor + leanCAFactor;
+        smoothedLF /= (currentCAFactor + restCAFactor + leanCAFactor);
         //draw lean direction on foot
         Vector3 leanGlobal = unit.senses.LeanPIDGlobal();
         //Debug.DrawRay(unit.bodyParts.rightFoot.transform.position, leanGlobal, Color.grey, 0.05f);
         //Debug.DrawRay(unit.bodyParts.leftFoot.transform.position, leanGlobal, Color.grey, 0.05f);
         unit.muscles.HardPushLimbTo(unit.bodyParts.rightFootCJ, smoothedRF, unit.bodyStats.footForceMax, unit.bodyStats.RightFootRestPos(), unit.bodyStats.legLength);
         unit.muscles.HardPushLimbTo(unit.bodyParts.leftFootCJ, smoothedLF, unit.bodyStats.footForceMax, unit.bodyStats.LeftFootRestPos(), unit.bodyStats.legLength);
+
+        PointToes(unit, leanDirection);
+    }
+
+    void PointToes(Unit unit, Vector3 localLeanPID)
+    {
+        var rfcj = unit.bodyParts.rightFootCJ;
+        var lfcj = unit.bodyParts.leftFootCJ;
+
+        //get old rotations
+        Quaternion rfOldRot = Quaternion.identity;
+        Quaternion lfOldRot = Quaternion.identity;
+
+        //Debug.Log($"desiredDegrees:{desiredDegrees}");
+        float desiredDegrees = localLeanPID.z * toePointFactor;
+        desiredDegrees = Mathf.Clamp(desiredDegrees, -75f, 75f);
+        Quaternion desiredRot = Quaternion.Euler(desiredDegrees, 0, 0);
+
+        ConfigurableJointExtensions.SetTargetRotationLocal(rfcj, desiredRot, rfOldRot);
+        ConfigurableJointExtensions.SetTargetRotationLocal(lfcj, desiredRot, lfOldRot);
     }
 
     void Hands(Unit unit, Vector3 leanDirection)
@@ -56,18 +78,18 @@ public class Stand : PhysAction //stand and balance
         Vector3 lhCurrent = unit.bodyParts.leftHandCJ.connectedAnchor;
 
         //hands go opposite direction of lean
-        Vector3 rhLean = rhRest - leanDirection;
-        Vector3 lhLean = lhRest - leanDirection;
+        Vector3 rhLean = rhRest - leanDirection * handReachMultiplier;
+        Vector3 lhLean = lhRest - leanDirection * handReachMultiplier;
 
         //heavily weight current
         Vector3 smoothedRH = currentCAFactor * rhCurrent +
                              restCAFactor * rhRest +
                              leanCAFactor * rhLean;
-        smoothedRH /= currentCAFactor + restCAFactor + leanCAFactor;
+        smoothedRH /= (currentCAFactor + restCAFactor + leanCAFactor);
         Vector3 smoothedLH = currentCAFactor * lhCurrent +
                               restCAFactor * lhRest +
                               leanCAFactor * lhLean;
-        smoothedLH /= currentCAFactor + restCAFactor + leanCAFactor;
+        smoothedLH /= (currentCAFactor + restCAFactor + leanCAFactor);
         //show leanDir from hands
         //Vector3 leanGlobal = unit.senses.LeanPIDGlobal();
         //Debug.DrawRay(unit.bodyParts.rightHand.transform.position, leanGlobal, Color.grey, 0.05f);

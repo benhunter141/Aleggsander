@@ -28,6 +28,7 @@ public class Muscles
         Vector3 pullDisplacement = limb.connectedAnchor - limb.transform.localPosition;
         float pullDistance = pullDisplacement.magnitude;
         float spring = fMax / pullDistance;
+        if (spring > unit.stats.maxSpring) spring = unit.stats.maxSpring;
         SoftJointLimitSpring limbSpring = limb.linearLimitSpring;
         limbSpring.spring = spring;
         limb.linearLimitSpring = limbSpring;

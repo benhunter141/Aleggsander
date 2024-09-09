@@ -29,6 +29,24 @@ public class Senses
         return local;
     }
 
+    public Vector2 MomentumLean() //global momentum -  baseplate - GREY
+    {
+        //v2 relative to baseplate - need a velocity for the baseplate...
+        Vector3 basePlateVelocity = (unit.bodyParts.rightFootRB.velocity + unit.bodyParts.leftFootRB.velocity) / 2;
+
+        Vector3 rhVelocity = unit.bodyParts.rightHandRB.velocity - basePlateVelocity;
+        Vector3 lhVelocity = unit.bodyParts.leftHandRB.velocity - basePlateVelocity;
+        Vector3 bodyVelocity = unit.bodyParts.rb.velocity - basePlateVelocity;
+
+        Vector3 rhMom = rhVelocity * unit.bodyParts.rightHandRB.mass;
+        Vector3 lhMom = lhVelocity * unit.bodyParts.leftHandRB.mass;
+        Vector3 bodyMom = bodyVelocity * unit.bodyParts.rb.mass;
+
+        Vector3 sum = rhMom + lhMom + bodyMom;
+        Vector2 leanSum = new Vector2(sum.x, sum.z);
+        return leanSum;
+    }
+
     public Vector3 LeanPIDGlobal()
     {
         Vector2 leanPID = LeanPID();
@@ -47,15 +65,15 @@ public class Senses
 
         Vector2 globalD = ConvertRotationToLeanDirection(AngularMomentumGlobal()) * unit.stats.dCoeff;   //RED
 
-        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalP), Color.blue, 0.05f);
-        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalI), Color.cyan, 0.05f);
-        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalD), Color.red, 0.05f);
+        Vector2 globalV = MomentumLean() * unit.stats.vCoeff;
 
-        //Debug.DrawRay(TrueCentreOfMass(), unit.bodyParts.rb.velocity, Color.green, 0.05f);
-        //Debug.DrawRay(TrueCentreOfMass(), balanceBaseDelta, Color.magenta, 0.05f);
+        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalP), Color.blue, 0.03f);
+        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalI), Color.cyan, 0.03f);
+        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalD), Color.red, 0.03f);
+        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalV), Color.grey, 0.03f);
+        Debug.DrawRay(TrueCentreOfMass(), ConvertV2ToV3(globalP + globalI + globalD + globalV), Color.yellow, 0.03f);
 
-
-        return globalP + globalI + globalD;
+        return globalP + globalI + globalD + globalV;
     }
     public void PositionGizmos()
     {
@@ -80,36 +98,28 @@ public class Senses
 
         //Body: use ang vel
         var body = unit.bodyParts.rb.mass * unit.bodyParts.rb.angularVelocity * unit.bodyStats.waistRadius / 4;
-        //Debug.DrawRay(unit.transform.position, body, Color.magenta, 0.05f);
+
         //Hands: use vel
         var rightHandLever = unit.bodyParts.rightHand.transform.position - centreOfMass;
         var rh = unit.bodyParts.rightHandRB.mass * Vector3.Cross(rightHandLever, unit.bodyParts.rightHandRB.velocity);
-        //Debug.DrawRay(unit.bodyParts.rightHand.transform.position, rh, Color.magenta, 0.05f);
-        //Debug.DrawRay(unit.bodyParts.rightHand.transform.position, rightHandLever, Color.yellow, 0.05f);
-        //Debug.DrawRay(unit.bodyParts.rightHand.transform.position, unit.bodyParts.rightHandRB.velocity, Color.green, 0.05f);
-        //var leanDebug = ConvertLeanDirectionToV3(ConvertRotationToLeanDirection(rh));
-        //Debug.DrawRay(unit.bodyParts.rightHand.transform.position, leanDebug, Color.red, 0.05f);
+
         var leftHandLever = unit.bodyParts.leftHand.transform.position - centreOfMass;
         var lh = unit.bodyParts.leftHandRB.mass * Vector3.Cross(leftHandLever, unit.bodyParts.leftHandRB.velocity);
-        //Debug.DrawRay(unit.bodyParts.leftHand.transform.position, leftHandLever, Color.yellow, 0.05f);
-        //Debug.DrawRay(unit.bodyParts.leftHand.transform.position, unit.bodyParts.leftHandRB.velocity, Color.green, 0.05f);
-        //leanDebug = ConvertLeanDirectionToV3(ConvertRotationToLeanDirection(lh));
-        //Debug.DrawRay(unit.bodyParts.leftHand.transform.position, leanDebug, Color.red, 0.05f);
-        //Debug.DrawRay(unit.bodyParts.leftHand.transform.position, lh, Color.magenta, 0.05f);
 
         //Feet
         var rightFootLever = unit.bodyParts.rightFoot.transform.position - centreOfMass;
         var rf = unit.bodyParts.rightFootRB.mass * Vector3.Cross(rightFootLever, unit.bodyParts.rightFootRB.velocity);
         var leftFootLever = unit.bodyParts.leftFoot.transform.position - centreOfMass;
         var lf = unit.bodyParts.leftFootRB.mass * Vector3.Cross(leftFootLever, unit.bodyParts.leftFootRB.velocity);
-        //leanDebug = ConvertLeanDirectionToV3(ConvertRotationToLeanDirection(lf));
-        //Debug.DrawRay(unit.bodyParts.leftFoot.transform.position, leanDebug, Color.red, 0.05f);
-        //leanDebug = ConvertLeanDirectionToV3(ConvertRotationToLeanDirection(rf));
-        //Debug.DrawRay(unit.bodyParts.rightFoot.transform.position, leanDebug, Color.red, 0.05f);
-        //Debug.DrawRay(unit.bodyParts.leftFoot.transform.position, unit.bodyParts.leftFootRB.velocity, Color.green, 0.05f);
-        //Debug.DrawRay(unit.bodyParts.rightFoot.transform.position, unit.bodyParts.rightFootRB.velocity, Color.green, 0.05f);
 
-        //sum them...?
+        var handLean = ConvertV2ToV3(ConvertRotationToLeanDirection(rh + lh)) * unit.stats.dCoeff;
+        var footLean = ConvertV2ToV3(ConvertRotationToLeanDirection(rf + lf)) * unit.stats.dCoeff;
+        var bodyLean = ConvertV2ToV3(ConvertRotationToLeanDirection(body)) * unit.stats.dCoeff;
+
+        Debug.DrawRay(TrueCentreOfMass(), handLean, Color.green, 0.03f);
+        Debug.DrawRay(TrueCentreOfMass(), footLean, Color.black, 0.03f);
+        Debug.DrawRay(TrueCentreOfMass(), bodyLean, Color.white, 0.03f);
+
         var total = body + rh + lh + rf + lf;
         return total;
     }

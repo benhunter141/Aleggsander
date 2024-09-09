@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Stand
   m_EditorClassIdentifier: 
   totalFrames: 1
-  currentCAFactor: 25
-  restCAFactor: 2
+  currentCAFactor: 20
+  restCAFactor: 1
   leanCAFactor: 1
   lateralStabilityFactor: 0.3
+  handReachMultiplier: 0.7
+  footReachMultiplier: 1.5
+  toePointFactor: 40

@@ -15,7 +15,7 @@ MonoBehaviour:
   impulsePerDamage: 10
   moveForce: 15
   mass: 12
-  drag: 1
+  drag: 0.1
   dynamicFriction: 0.15
   staticFriction: 2
   originalScale: 1
@@ -25,11 +25,13 @@ MonoBehaviour:
   turn: {fileID: 11400000, guid: 247d05fe4b0214f419f9e93d6255e53c, type: 2}
   atk: {fileID: 11400000, guid: 6fc113ff9a3449c4fb16823ac9ae3064, type: 2}
   getup: {fileID: 11400000, guid: 34dbb11c615b4f348861512dad8b8108, type: 2}
+  maxSpring: 700
   stabilityTime: 10
   posTolerance: 0.1
   rotTolerance: 0.15
   uprightTolerance: 60
-  pCoeff: 0.9
-  iCoeff: 1.38
+  pCoeff: 2.25
+  iCoeff: 8
   dCoeff: 0.05
-  memoryFrames: 100
+  vCoeff: 0.25
+  memoryFrames: 50

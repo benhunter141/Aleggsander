@@ -22,6 +22,7 @@ public class StandUpFallDown : BehaviourTree
         bellyToQuad.transitions.Add(new Transition(sm, bellyToQuad, quadToDownDog, FullyOnBelly));
         bellyToQuad.transitions.Add(new Transition(sm, bellyToQuad, rollToBelly, NotBarelyOnBelly));
         quadToDownDog.transitions.Add(new Transition(sm, quadToDownDog, downDogToErect, PosturedUp));
+        quadToDownDog.transitions.Add(new Transition(sm, quadToDownDog, rollToBelly, NotBarelyOnBelly));
         downDogToErect.transitions.Add(new Transition(sm, downDogToErect, erect, Balanced));
         erect.transitions.Add(new Transition(sm, erect, rollToBelly, Fallen));
 

@@ -3877,7 +3877,7 @@ ConfigurableJoint:
   m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 100
-    damper: 15
+    damper: 20
   m_LinearLimit:
     limit: 0.05
     bounciness: 0
@@ -3930,13 +3930,13 @@ ConfigurableJoint:
   m_AngularXDrive:
     serializedVersion: 4
     positionSpring: 100
-    positionDamper: 1
+    positionDamper: 9
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
     positionSpring: 100
-    positionDamper: 0
+    positionDamper: 9
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -5964,7 +5964,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &2395763871564414367
 GameObject:
   m_ObjectHideFlags: 0
@@ -6621,14 +6621,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6300152911423734973}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.672, y: 0.44, z: -0.007}
+  m_LocalRotation: {x: 0.011802604, y: -0, z: -0, w: 0.9999304}
+  m_LocalPosition: {x: 1.672, y: 0.862, z: 0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 598540394116791047}
-  - {fileID: 3000699157036402794}
-  - {fileID: 6615264291849731283}
   - {fileID: 6058039131335220316}
   - {fileID: 2797996998032602288}
   - {fileID: 4305233018537820621}
@@ -6638,8 +6636,10 @@ Transform:
   - {fileID: 7996938539606981683}
   - {fileID: 114516968106315769}
   - {fileID: 8750130321990486718}
+  - {fileID: 3000699157036402794}
+  - {fileID: 6615264291849731283}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.353, y: 0, z: 0}
 --- !u!4 &3463888687403923301
 Transform:
   m_ObjectHideFlags: 0
@@ -6681,7 +6681,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &3510149648040687900
 GameObject:
   m_ObjectHideFlags: 0
@@ -7379,7 +7379,7 @@ ConfigurableJoint:
   m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 100
-    damper: 15
+    damper: 20
   m_LinearLimit:
     limit: 0.05
     bounciness: 0
@@ -7432,13 +7432,13 @@ ConfigurableJoint:
   m_AngularXDrive:
     serializedVersion: 4
     positionSpring: 100
-    positionDamper: 1
+    positionDamper: 9
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
     positionSpring: 100
-    positionDamper: 0
+    positionDamper: 9
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -7858,7 +7858,7 @@ ConfigurableJoint:
   m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 300
-    damper: 5
+    damper: 20
   m_LinearLimit:
     limit: 0.05
     bounciness: 0
@@ -8381,7 +8381,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &5473395517834397638
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8709,7 +8709,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &6011408057567449721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10407,7 +10407,7 @@ ConfigurableJoint:
   m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 300
-    damper: 5
+    damper: 20
   m_LinearLimit:
     limit: 0.05
     bounciness: 0
